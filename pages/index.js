@@ -1,65 +1,37 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
-export default function Home() {
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Loader from '../components/loader'
+import TradeSetup from '../components/tradeSetup'
+import { getAllTeams, getAllPlayers } from '../utils/services'
+
+const queryClient = new QueryClient()
+
+export default function App() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <QueryClientProvider client={queryClient}>
+      <Home/>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  )
+}
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+function Home() {
+  const { isLoading: loadingPlayers, error: playerError, data: playerData, isError: isPlayerFetchError } = useQuery('players', getAllPlayers)
+  const { isLoading: loadingTeams, error: teamError, data: teamData, isError: isTeamFetchError } = useQuery('teams', getAllTeams)
+  if (loadingPlayers || loadingTeams) return <Loader />;
+  if (isPlayerFetchError) return 'Error fetching Player(s) has occurred: ' + playerError.message
+  if (isTeamFetchError) return 'Error fetching Team(s) has occurred: ' + teamError.message
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+  return (
+    <>
+      <div className="text-4xl text-center">
+        <Header />
+        { playerData && teamData && <TradeSetup players={playerData} teams={teamData} /> }
+        <Footer />
+      </div>
+    </>
   )
 }
