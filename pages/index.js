@@ -1,37 +1,61 @@
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import React from 'react'
+import { Router, Route } from 'react-router-dom'
+import { createMemoryHistory } from 'history';
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Loader from '../components/loader'
 import TradeSetup from '../components/tradeSetup'
-import { getAllTeams, getAllPlayers } from '../utils/services'
+
+import usePlayers from '../hooks/usePlayers'
+import useTeams from '../hooks/useTeams'
+
+const history = createMemoryHistory();
 
 const queryClient = new QueryClient()
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Home/>
+      <Router history={history}>
+        <Route path="/" exact render={() => <Home/>} />
+      </Router>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
 
 function Home() {
-  const { isLoading: loadingPlayers, error: playerError, data: playerData, isError: isPlayerFetchError } = useQuery('players', getAllPlayers)
-  const { isLoading: loadingTeams, error: teamError, data: teamData, isError: isTeamFetchError } = useQuery('teams', getAllTeams)
-  if (loadingPlayers || loadingTeams) return <Loader />;
-  if (isPlayerFetchError) return 'Error fetching Player(s) has occurred: ' + playerError.message
-  if (isTeamFetchError) return 'Error fetching Team(s) has occurred: ' + teamError.message
+  const playersQuery = usePlayers()
+  const teamsQuery = useTeams()
+
+  if (playersQuery.isLoading || teamsQuery.isLoading) return <Loader />;
+  if (playersQuery.isError) return 'Error fetching Player(s) has occurred: ' + playersQuery.error.message
+  if (teamsQuery.isError) return 'Error fetching Team(s) has occurred: ' + teamsQuery.error.message
 
   return (
     <>
-      <div className="text-4xl text-center">
-        <Header />
-        { playerData && teamData && <TradeSetup players={playerData} teams={teamData} /> }
+      <div className="text-center text-purple-800">
+        <Header isFetching={queryClient.isFetching()} />
+        { playersQuery.data && teamsQuery.data && <TradeSetup players={playersQuery.data} teams={teamsQuery.data} /> }
         <Footer />
       </div>
     </>
   )
 }
+
+// TODO:
+// FUNCTIONALITY
+// - render players by team id (stats, img, number, position)
+//   - select/deselect players for trade
+//   - execute trade (update teams & players... redirect?, summary?)
+// ENHANCE
+// - extract common style patterns
+// - extract header+footer to common layout component
+// - DRY code
+// - common responsive trade layout
+// - data viz
+// - lazy loading
+// - hosted imgs

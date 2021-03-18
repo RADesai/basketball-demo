@@ -12,7 +12,7 @@ function TradeSetup({ players, teams }) {
 
     const teamsSet = left && right && (left.tid !== right.tid);
     return (
-        <div className="text-purple-800 text-center">
+        <div className="text-center">
             <div className="grid place-items-center xs:grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 font-light bg-purple-50 p-10 shadow-xl">
                 <div className="xs:col-span-1 lg:col-span-2 text-lg text-purple-900">
                     <img src={left.logo} className="mx-auto"/>
@@ -42,9 +42,6 @@ function TradeSetup({ players, teams }) {
                 </button>
 
             }
-                <div>
-                    <Image src="/assets/logo.png" alt="NBA DEMO logo" height="256" width="256" className="hover:animate-bounce" />
-                </div>
             </div>
         </div>
     )
