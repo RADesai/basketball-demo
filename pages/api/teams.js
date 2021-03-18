@@ -243,5 +243,5 @@ const teams = [
 
 export default (req, res) => {
   // res.status(200).json(teams)
-  setTimeout(() => res.status(200).json(teams), 3000)
+  setTimeout(() => res.status(200).json(teams), 1000)
 }

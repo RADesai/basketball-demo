@@ -6960,6 +6960,6 @@ const players = [
 ]
 
 export default (req, res) => {
-  setTimeout(() => res.status(200).json(players), 2000)
+  setTimeout(() => res.status(200).json(players), 1000)
   // res.status(200).json(players)
 }

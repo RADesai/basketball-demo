@@ -13,26 +13,21 @@ function TradeSetup({ players, teams }) {
     const teamsSet = left && right && (left.tid !== right.tid);
     return (
         <div className="text-purple-800 text-center">
+            <div className="min-h-20">
             {
-                teamsSet &&
-                <div>
-                    <div className="font-bold mb-3">Trade Between</div>
-                    <div className="grid grid-cols-8">
-                        <div className="col-span-1">
-                            <Image src="/assets/bounce.png" alt="scroll-down-icon" height="64" width="64" className="animate-pulse" />
-                        </div>
-                        <div className="col-span-3 text-xl font-normal">
-                            {left.city} {left.name}
-                        </div>
-                        <div className="col-span-3 text-xl font-normal">
-                            {right.city} {right.name}
-                        </div>
-                        <div className="col-span-1">
-                            <Image src="/assets/bounce.png" alt="scroll-down-icon" height="64" width="64" className="animate-pulse" />
-                        </div>
+                teamsSet && <div className="grid grid-cols-7 p-2">
+                    <div className="col-span-3 text-2xl font-light pt-1">
+                        {left.city} {left.name}
+                    </div>
+                    <div className="col-span-1">
+                        <Image src="/assets/bounce.png" alt="scroll-down-icon" height="64" width="64" className="" />
+                    </div>
+                    <div className="col-span-3 text-2xl font-light pt-1">
+                        {right.city} {right.name}
                     </div>
                 </div>
             }
+            </div>
             <div className="grid xs:grid-cols-1 sm:grid-cols-2 font-light bg-purple-50 p-10">
                 <div className="col-span-1 text-lg align-middle px-2 py-8 text-purple-900 mx-auto">
                     <select className="border rounded-md p-1 border-purple-400 bg-purple-50 font-bold" onChange={(e) => setLeft(findTeam(teams, e.target.value))} placeholder="Select Team 1">
@@ -52,10 +47,12 @@ function TradeSetup({ players, teams }) {
                 teamsSet &&
                 <button className="text-2xl uppercase mb-2 p-2 w-60 hover:bg-purple-50 duration-150 font-bold tracking-wide focus:tracking-widest hover:tracking-widest">
                     <div className="mr-2 inline align-top">Continue</div>
-                    <Image src="/assets/hoop.png" alt="hoop-icon" height="32" width="32" />
                 </button>
 
             }
+                <div>
+                    <Image src="/assets/logo.png" alt="NBA DEMO logo" height="256" width="256" />
+                </div>
             </div>
         </div>
     )
