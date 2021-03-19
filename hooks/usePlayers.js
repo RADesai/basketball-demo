@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 export default function usePlayers() {
     return useQuery(
-        'posts',
+        'players',
         () => fetch('/api/players').then((res) => res.json()),
     )
 }

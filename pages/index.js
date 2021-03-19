@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Router, Route } from 'react-router-dom'
 import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -37,7 +37,7 @@ function Home() {
 
   return (
     <>
-      <div className="text-center text-purple-800">
+      <div className="text-center text-purple-800 pb-40">
         <Header isFetching={queryClient.isFetching()} />
         { playersQuery.data && teamsQuery.data && <TradeSetup players={playersQuery.data} teams={teamsQuery.data} /> }
         <Footer />
@@ -48,7 +48,6 @@ function Home() {
 
 // TODO:
 // FUNCTIONALITY
-// - render players by team id (stats, img, number, position)
 //   - select/deselect players for trade
 //   - execute trade (update teams & players... redirect?, summary?)
 // ENHANCE
@@ -56,6 +55,7 @@ function Home() {
 // - extract header+footer to common layout component
 // - DRY code
 // - common responsive trade layout
+// - team #color themes
 // - data viz
 // - lazy loading
 // - hosted imgs
