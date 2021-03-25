@@ -1,30 +1,21 @@
-import axios from 'axios';
-import { useMutation, queryCache } from 'react-query';
+import { useMutation, QueryClient } from 'react-query';
 
-export default function useSavePlayer() {
-    return useMutation((newPlayer) =>
-        axios.patch(`/api/players/${newPlayer.pid}`, newPlayer).then((res) => res.data),
-        {
-        onMutate: (newPlayer) => {
-            // update the data
-            queryCache.setQueryData(['players', newPlayer.pid], newPlayer);
-        },
-        onSuccess: (newPlayer) => {
-            queryCache.setQueryData(['players', newPlayer.pid], newPlayer);
+const queryClient = new QueryClient()
 
-            if (queryCache.getQueryData('players')) {
-                queryCache.setQueryData('players', (old) =>
-                    old.map((d) => {
-                        if (d.pid === newPlayer.pid) {
-                            return newPlayer;
-                        }
-                        return d;
-                    })
-                );
-            } else {
-            queryCache.setQueryData('players', [newPlayer]);
-            queryCache.invalidateQueries('players');
-            }
-        },
-    });
+export default function useUpdatePlayer() {
+    return useMutation(updatePlayer)
+}
+
+const updatePlayer = async (newPlayer) => {
+    const response = await fetch(`/api/players/`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newPlayer)
+    })
+
+    if (!response.ok) {
+        throw new Error('Something went wrong during trade.')
+    }
+
+    return true;
 }

@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Player {
+  pid       Int @id
+  ln        String
+  fn        String
+  ta        String
+  num       String?
+  pos       String?
+  pts       Float?  @default(0.0)
+  reb       Float?  @default(0.0)
+  ast       Float?  @default(0.0)
+  stl       Float?  @default(0.0)
+  headshot  String?
+  slug      String?
+}
+
+model Team {
+  tid       Int @id
+  ta        String
+  city      String
+  name      String
+  color     String
+  logo      String
+}
