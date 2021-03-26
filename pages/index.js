@@ -41,13 +41,11 @@ function Home() {
   )
 }
 
+// TODO:
+  // do we need players.db ??
+  // ** // RESET DB before submit **
 // ENHANCE
-// - trim stats decimals
-// - team #color themes
+// - salary
 // - draft picks, cash considerations for trading
 // - extract imgs
-
-// NBA color scheme
-  // Philippine Red - Hex: #C9082A
-  // Dark Cornflower Blue - Hex: #17408B
-// trade bank
+// - trade bank
