@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import Loader from './Loader'
+import Loader from './loader'
 
 export default function Header({ isFetching }) {
     const animate = isFetching ? 'animate-pulse' : '';

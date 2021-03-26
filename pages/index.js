@@ -5,9 +5,9 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import Error from '../components/error'
-import Layout from '../components/Layout'
-import Loader from '../components/Loader'
-import TradeSetup from '../components/TradeSetup'
+import Layout from '../components/layout'
+import Loader from '../components/loader'
+import TradeSetup from '../components/tradeSetup'
 
 import usePlayers from '../hooks/usePlayers'
 import useTeams from '../hooks/useTeams'
