@@ -28,15 +28,13 @@ function TradePreview({ tradeBlock, leftCode, rightCode, resetTradeBlock }) {
 
     return (
         <div>
-            {/* { playerMutate.isError ? <Error /> : */}
-                    <button
-                        disabled={playerMutate.isLoading}
-                        onClick={() => executeTrade(tradeBlock)}
-                        className="text-2xl uppercase mb-2 p-2 w-60 hover:bg-purple-50 duration-150 font-bold tracking-wide focus:tracking-widest hover:tracking-widest"
-                    >
-                        { playerMutate.isLoading ? 'Loading...' : 'Execute Trade' }
-                    </button>
-            {/* } */}
+            <button
+                disabled={playerMutate.isLoading}
+                onClick={() => executeTrade(tradeBlock)}
+                className="text-2xl uppercase mb-2 p-2 w-60 hover:bg-purple-50 duration-150 font-bold tracking-wide focus:tracking-widest hover:tracking-widest"
+            >
+                { playerMutate.isLoading ? 'Loading...' : 'Execute Trade' }
+            </button>
         </div>
     )
 }

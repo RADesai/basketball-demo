@@ -14,6 +14,6 @@ export default async (req, res) => {
     return res.status(204).send()
   } else {
     const players = await prisma.player.findMany();
-    setTimeout(() => res.status(200).json(players), 1000) // Timeout to preview loader
+    setTimeout(() => res.status(200).json(players), 500) // Timeout to preview loader
   }
 }
