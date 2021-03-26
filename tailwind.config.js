@@ -1,3 +1,5 @@
+const { colors: defaultColors } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
@@ -7,7 +9,9 @@ module.exports = {
         'spin-slow': 'spin 4s linear infinite',
       },
       colors: {
-        nba: {
+        NBA: {
+          RED: "#c9082a",
+          BLUE: "#17408b",
           ATL: "#e13a3e",
           BOS: "#008348",
           CLE: "#860038",
@@ -39,7 +43,7 @@ module.exports = {
           DET: "#006bb6",
           CHA: "#00788c"
         }
-      }
+      },
     },
   },
   variants: {

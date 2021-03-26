@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgres://ealbauedxdzepc:2e4d93ce7d7ca5185743d668f1b97a8777af664753edbfceeb2646a847b2f834@ec2-54-161-239-198.compute-1.amazonaws.com:5432/dbetc1v9tmetbo"
 }
 
 generator client {
@@ -17,10 +17,10 @@ model Player {
   ta        String
   num       String?
   pos       String?
-  pts       Float?  @default(0.0)
-  reb       Float?  @default(0.0)
-  ast       Float?  @default(0.0)
-  stl       Float?  @default(0.0)
+  pts       Decimal?  @default(0.0)
+  reb       Decimal?  @default(0.0)
+  ast       Decimal?  @default(0.0)
+  stl       Decimal?  @default(0.0)
   headshot  String?
   slug      String?
 }

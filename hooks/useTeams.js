@@ -3,7 +3,12 @@ import { useQuery } from 'react-query';
 export default function useTeams() {
     return useQuery(
         'teams',
-        getTeams
+        getTeams,
+        {
+            retry: 3,
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+        }
     )
 }
 
