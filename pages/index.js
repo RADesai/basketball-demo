@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Router, Route } from 'react-router-dom'
 import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import Error from '../components/Error'
+import Error from '../components/error'
 import Layout from '../components/Layout'
 import Loader from '../components/Loader'
 import TradeSetup from '../components/TradeSetup'
