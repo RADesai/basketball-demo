@@ -19,7 +19,7 @@ export default function Footer() {
                 <Image src="/assets/logo_dark.png" alt="hoop-icon" height="128" width="128" className="object-cover" />
             </div>
             <div className="text-right col-span-1 p-2">
-                <div div>Designed & Built by R.A. Desai</div>
+                <div>Designed & Built by R.A. Desai</div>
             </div>
         </div>
     )

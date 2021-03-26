@@ -5,7 +5,7 @@ export default function usePlayers() {
         'players',
         getPlayers,
         {
-            notifyOnChangeProps: ['data', 'error'],
+            notifyOnChangeProps: ['data'],
             retry: 3,
             refetchOnWindowFocus: false
         }

@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
+import Loader from './Loader'
+
 export default function Header({ isFetching }) {
     const animate = isFetching ? 'animate-pulse' : '';
     return (
@@ -15,6 +17,10 @@ export default function Header({ isFetching }) {
             </div>
             <div className="col-span-2 text-5xl pt-2 text-left">
                 TRADE
+                { isFetching ?
+                    <div className="inline-block float-right pr-3"><Loader isMini={true} /></div>
+                    : null
+                }
             </div>
         </div>
     )

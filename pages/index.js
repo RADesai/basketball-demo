@@ -4,11 +4,10 @@ import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import Error from '../components/error'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Loader from '../components/loader'
-import TradeSetup from '../components/tradeSetup'
+import Error from '../components/Error'
+import Layout from '../components/Layout'
+import Loader from '../components/Loader'
+import TradeSetup from '../components/TradeSetup'
 
 import usePlayers from '../hooks/usePlayers'
 import useTeams from '../hooks/useTeams'
@@ -29,20 +28,16 @@ export default function App() {
 }
 
 function Home() {
-  const playersMutation = usePlayers()
+  const playersQuery = usePlayers()
   const teamsQuery = useTeams()
 
-  if (playersMutation.isLoading || teamsQuery.isLoading) return <Loader />;
-  if (playersMutation.isError || teamsQuery.isError) return <Error />
+  if (playersQuery.isLoading || teamsQuery.isLoading) return <Loader />;
+  if (playersQuery.isError || teamsQuery.isError) return <Error />
 
   return (
-    <>
-      <div className="text-center text-purple-800 pb-40">
-        <Header isFetching={queryClient.isFetching()} />
-        { playersMutation.data && teamsQuery.data && <TradeSetup players={playersMutation.data} teams={teamsQuery.data} /> }
-        <Footer />
-      </div>
-    </>
+    <Layout players={playersQuery.data} teams={teamsQuery.data} query={queryClient}>
+      <TradeSetup/>
+    </Layout>
   )
 }
 
@@ -52,12 +47,15 @@ function Home() {
 ////   - trade confirmation/cancellation
 // ENHANCE
 // - extract common style patterns
-// - extract header+footer to common layout component
 // - DRY code
 // - common responsive trade layout
 // - team #color themes
 // - draft picks, cash considerations for trading
-// - data viz
-// - lazy loading
 // - extract imgs
 // - 3/4 way trades
+
+
+// NBA color scheme
+  // Philippine Red - Hex: #C9082A
+  // Dark Cornflower Blue - Hex: #17408B
+// trade bank
