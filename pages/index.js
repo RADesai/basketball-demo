@@ -41,19 +41,11 @@ function Home() {
   )
 }
 
-// TODO:
-// FUNCTIONALITY
-//   - trade redirect?/summary?
-////   - trade confirmation/cancellation
 // ENHANCE
-// - extract common style patterns
-// - DRY code
-// - common responsive trade layout
+// - trim stats decimals
 // - team #color themes
 // - draft picks, cash considerations for trading
 // - extract imgs
-// - 3/4 way trades
-
 
 // NBA color scheme
   // Philippine Red - Hex: #C9082A

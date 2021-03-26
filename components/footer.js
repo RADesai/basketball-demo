@@ -16,7 +16,9 @@ export default function Footer() {
                 </div>
             </div>
             <div className="col-span-1">
-                <Image src="/assets/logo_dark.png" alt="hoop-icon" height="128" width="128" className="object-cover" />
+                <a href="/">
+                    <Image src="/assets/logo_dark.png" alt="hoop-icon" height="128" width="128" className="object-cover" />
+                </a>
             </div>
             <div className="text-right col-span-1 p-2">
                 <div>Designed & Built by R.A. Desai</div>
