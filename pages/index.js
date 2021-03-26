@@ -4,8 +4,8 @@ import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Error from '../components/error'
+import Layout from '../components/layout'
 import Loader from '../components/loader'
 import TradeSetup from '../components/tradeSetup'
 
@@ -32,30 +32,22 @@ function Home() {
   const teamsQuery = useTeams()
 
   if (playersQuery.isLoading || teamsQuery.isLoading) return <Loader />;
-  if (playersQuery.isError) return 'Error fetching Player(s) has occurred: ' + playersQuery.error.message
-  if (teamsQuery.isError) return 'Error fetching Team(s) has occurred: ' + teamsQuery.error.message
+  if (playersQuery.isError || teamsQuery.isError) return <Error />
 
   return (
-    <>
-      <div className="text-center text-purple-800">
-        <Header isFetching={queryClient.isFetching()} />
-        { playersQuery.data && teamsQuery.data && <TradeSetup players={playersQuery.data} teams={teamsQuery.data} /> }
-        <Footer />
-      </div>
-    </>
+    <Layout players={playersQuery.data} teams={teamsQuery.data} query={queryClient}>
+      <TradeSetup/>
+    </Layout>
   )
 }
 
-// TODO:
-// FUNCTIONALITY
-// - render players by team id (stats, img, number, position)
-//   - select/deselect players for trade
-//   - execute trade (update teams & players... redirect?, summary?)
 // ENHANCE
-// - extract common style patterns
-// - extract header+footer to common layout component
-// - DRY code
-// - common responsive trade layout
-// - data viz
-// - lazy loading
-// - hosted imgs
+// - trim stats decimals
+// - team #color themes
+// - draft picks, cash considerations for trading
+// - extract imgs
+
+// NBA color scheme
+  // Philippine Red - Hex: #C9082A
+  // Dark Cornflower Blue - Hex: #17408B
+// trade bank
